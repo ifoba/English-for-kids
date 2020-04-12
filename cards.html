@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container header">
+            <nav>
+                <button id="burger" type="button" class="navbar" onselect="return false" onmousedown="return false">
+                    <span class="icon-bar" disabled></span>
+                    <span class="icon-bar" disabled></span>
+                    <span class="icon-bar" disabled></span>
+                </button>
+                <ul class="nav-list"  onselect="return false" onmousedown="return false">
+                    <li><button type="button" class="nav-btn">X</button></li>
+                    <li><a href="./main.html">Home</a></li>
+                    <li><a href="">Action A</a></li>
+                    <li><a href="">Action B</a></li>
+                    <li><a href="">Clothes</a></li>
+                    <li><a href="">Adjective</a></li>
+                    <li><a href="">Animal A</a></li>
+                    <li><a href="">Animal B</a></li>
+                    <li><a href="">Theme</a></li>
+                    <li><a href="">Theme</a></li>
+                </ul>
+                <div class="switch">
+                    <span>Train</span>
+                    <input class="switch-btn" type="checkbox" onselect="return false" onmousedown="return false" />
+                    <span>Play</span>
+                </div>
+            </nav>
+        </div>
+        <div id="card-container" class="row row-cols-1 row-cols-md-4"></div>
+    </div>
+    
+    <script src="./src/cards.js"></script>
+    <script src="./src/header.js"></script>    
+</body>
+</html>
