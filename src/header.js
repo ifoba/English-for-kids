@@ -31,9 +31,11 @@ document.querySelector('.switch-btn').addEventListener('click', function(event) 
             cards.forEach(el=>el.classList.remove('bg-info'));
             localStorage.setItem('checkboxStatus', '')
         }else {
+            startGame = false;
+            countGame = 0;
+            randomCardArr = themes[localStorage.getItem('currentCard')].map(el=>el.name).sort(rnd);
             cards.forEach(el=> {
-                document.querySelector('.start-btn-text').innerHTML = 'Start Game';
-                startGame = false;
+                document.querySelector('.start-btn-text').innerHTML = 'Start Game';                
                 document.getElementById('start-btn').style.display = 'flex';
                 el.classList.remove('bg-info');
                 el.querySelectorAll('.card-body').forEach(item => item.classList.add('hidden'));
@@ -51,6 +53,8 @@ document.querySelector('.switch-btn').addEventListener('click', function(event) 
             cards.forEach(el=> {
                 el.classList.add('bg-info')
                 el.querySelectorAll('.card-body').forEach(item => item.classList.remove('hidden'));
+                cards.forEach(el=>el.classList.remove('inactive'));
+                startGame = false;
             });
             localStorage.setItem('checkboxStatus', 'bg-info');
         }

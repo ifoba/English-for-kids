@@ -167,6 +167,11 @@ switch-btn:checked:focus {
  
 }
 
+.inactive {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .card-flip-front, .card-flip-back {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
