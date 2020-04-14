@@ -1,3 +1,4 @@
+const getCurrentCard = localStorage.getItem('currentCard');
 const themes = {
   "Action A" : [
     {
@@ -153,14 +154,15 @@ const themes = {
 
 }
 const cardsContainer = document.getElementById('card-container'); 
+reloadStatus = true;
 
 function cardsCreate (el) {
   if (localStorage.getItem('checkboxStatus') === 'bg-info') { 
     return `
       <div class ="col mb-3">
-          <div id = "${el.name}" class ="card text-center text-white bg-info ">
+          <div  class ="card text-center text-white bg-info ">
             <div class="card-flip-front">
-              <img class ="card-img-top" src="${el.image}" alt ="">
+              <img id = "${el.name}" class ="card-img-top" src="${el.image}" alt ="">
               <div class="card-body">
                 <h5>${el.name}</h5>
                 <img class="flip-icon" src="./assets/flip.png">
@@ -199,8 +201,13 @@ function cardsCreate (el) {
     
 }
 cardsContainer.innerHTML = `
-    ${themes[localStorage.getItem('currentCard')].map(cardsCreate).join('')}
+    ${themes[getCurrentCard].map(cardsCreate).join('')}
 `;
+let btnContainer = document.createElement('div');
+btnContainer.id = 'start-btn';
+btnContainer.innerHTML = '<p class = "start-btn-text">Start Game</p>';
+document.body.querySelector('.container').append(btnContainer);
+const cards = document.querySelectorAll('.card');
 let iconClickStatus = false;
 let flipIcon = document.querySelectorAll('.flip-icon');
 flipIcon.forEach((icon, index)=> {
@@ -221,15 +228,10 @@ document.querySelectorAll('.col.mb-3').forEach((el, i)=>{
   })
 })
 
-let btnContainer = document.createElement('div');
-btnContainer.id = 'start-btn'
-btnContainer.innerHTML = '<p class = "start-btn-text">Start Game</p>'
-document.body.querySelector('.container').append(btnContainer)
-
 function rnd(a, b) {
   return Math.random()- 0.5;
 }
-let randomCardArr = themes[localStorage.getItem('currentCard')].map(el=>el.name).sort(rnd);
+let randomCardArr = themes[getCurrentCard].map(el=>el.name).sort(rnd);
 let startGame = false;
 let countGame = 0;
 let audio = new Audio();
@@ -241,10 +243,8 @@ document.querySelector('.start-btn-text').addEventListener('click', event => {
     console.log(randomCardArr[countGame]);
     audio = new Audio(`./assets/audio/${randomCardArr[countGame]}.mp3`);
     audio.play();
-    /* countGame += 1; */
     startGame = true;
-  }
-  else {
+  }else {
     console.log(randomCardArr[countGame-1]);
     audio.play();
   }
@@ -252,21 +252,21 @@ document.querySelector('.start-btn-text').addEventListener('click', event => {
 
 for (let el of document.querySelectorAll('.card')) {
   el.addEventListener('click', event => {
-    /* console.log(event.target.id);
-    console.log(randomCardArr[countGame]); */
-    if(event.target.id === randomCardArr[countGame] && countGame !== 7 && startGame === true ) {
+    if(event.target.id === randomCardArr[countGame] && countGame !== 7 && startGame) {
       countGame += 1;
       audio = new Audio(`./assets/audio/${randomCardArr[countGame]}.mp3`);
       audio.play()
       event.target.parentNode.parentNode.classList.add('inactive');
       console.log('yes');
       /* event.target.style[pointer-events]= 'none'; */
-    }else if (event.target.id !== randomCardArr[countGame] && countGame !== 8 && startGame === true) {
+    }else if (event.target.id !== randomCardArr[countGame] && countGame !== 8 && startGame) {
       console.log('nope')
       err.play();
-    }
-    else if(event.target.id === randomCardArr[countGame] && countGame === 7 && startGame === true ) {
+    }else if(event.target.id === randomCardArr[countGame] && countGame === 7 && startGame) {
       success.play();
+    }else if(!startGame && event.target.classList.contains('card-img-top')){
+      audio = new Audio(`./assets/audio/${event.target.id}.mp3`);
+      audio.play();
     }
   })
 }

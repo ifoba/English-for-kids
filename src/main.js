@@ -1,3 +1,6 @@
+const getCurrentCard = localStorage.getItem('currentCard');
+const cards = document.querySelectorAll('.card');
+
 if (localStorage.getItem('currentCard') !== "Home") {
     localStorage.setItem('currentCard', 'Home');
 }
