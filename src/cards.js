@@ -154,7 +154,7 @@ const themes = {
 
 }
 const cardsContainer = document.getElementById('card-container'); 
-reloadStatus = true;
+let reloadStatus = true;
 
 function cardsCreate (el) {
   if (localStorage.getItem('checkboxStatus') === 'bg-info') { 
@@ -250,6 +250,7 @@ document.querySelector('.start-btn-text').addEventListener('click', event => {
   }
 });
 
+
 for (let el of document.querySelectorAll('.card')) {
   el.addEventListener('click', event => {
     if(event.target.id === randomCardArr[countGame] && countGame !== 7 && startGame) {
@@ -258,15 +259,19 @@ for (let el of document.querySelectorAll('.card')) {
       audio.play()
       event.target.parentNode.parentNode.classList.add('inactive');
       console.log('yes');
-      /* event.target.style[pointer-events]= 'none'; */
+      document.querySelector('.star-container').innerHTML += `<img src= "./assets/star_yes.png">`;
     }else if (event.target.id !== randomCardArr[countGame] && countGame !== 8 && startGame) {
       console.log('nope')
       err.play();
+      document.querySelector('.star-container').innerHTML += `<img src= "./assets/no.png">`;
     }else if(event.target.id === randomCardArr[countGame] && countGame === 7 && startGame) {
       success.play();
+      document.querySelector('.star-container').innerHTML += `<img src= "./assets/star_yes.png">`;
+      event.target.parentNode.parentNode.classList.add('inactive');
     }else if(!startGame && event.target.classList.contains('card-img-top')){
       audio = new Audio(`./assets/audio/${event.target.id}.mp3`);
       audio.play();
+      
     }
   })
 }

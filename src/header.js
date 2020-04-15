@@ -5,7 +5,7 @@ const cardsFlip = document.querySelectorAll('.col.mb-3');
 const switchBtn = document.querySelector('.switch-btn');
 
 const startBtn = document.getElementById('start-btn');
-let reloadStatus = true;
+
 
 localStorage.getItem('checkboxStatus') === '' ? switchBtn.checked = true : switchBtn.checked = false;
 if (switchBtn.checked) {
