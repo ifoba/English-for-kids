@@ -1,7 +1,8 @@
+import './header.js';
 const getCurrentCard = localStorage.getItem('currentCard');
 const cards = document.querySelectorAll('.card');
 let reloadStatus = true;
-if (localStorage.getItem('currentCard') !== "Home") {
+if (getCurrentCard !== "Home") {
     localStorage.setItem('currentCard', 'Home');
 }
 for (let el of cards) {
@@ -10,5 +11,3 @@ for (let el of cards) {
         reloadStatus = false
     })
 }
-
-

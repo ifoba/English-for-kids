@@ -1,3 +1,4 @@
+import './header.js';
 const getCurrentCard = localStorage.getItem('currentCard');
 const themes = {
   "Action A" : [
