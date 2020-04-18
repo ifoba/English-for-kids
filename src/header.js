@@ -1,18 +1,17 @@
-const header = document.querySelector('.header');
-const navList = document.querySelector('.nav-list');
-
-const cardsFlip = document.querySelectorAll('.col.mb-3');
 const switchBtn = document.querySelector('.switch-btn');
-
-const startBtn = document.getElementById('start-btn');
+const navList = document.querySelector('.nav-list');
+const header = document.querySelector('.header'); 
 
 
 localStorage.getItem('checkboxStatus') === '' ? switchBtn.checked = true : switchBtn.checked = false;
+
 if (switchBtn.checked) {
-    cards.forEach(el => el.classList.remove('bg-info'));
-    if (getCurrentCard !== 'Home')
-    startBtn.style.display = 'flex';
+    document.querySelectorAll('.card').forEach(el => el.classList.remove('bg-info'));
+    if (localStorage.getItem('currentCard') !== 'Home') {
+    document.getElementById('start-btn').style.display = 'flex';
     startGame = false;
+    }
+    
 }
 
 function controlMenu(event) {
@@ -25,31 +24,32 @@ function controlMenu(event) {
 
 function controlGameStatus (event) {
     if (event.target.checked) {
-        if(getCurrentCard === "Home"){
-            cards.forEach(el=>el.classList.remove('bg-info'));
+        if(localStorage.getItem('currentCard') === "Home"){
+            document.querySelectorAll('.card').forEach(el=>el.classList.remove('bg-info'));
             localStorage.setItem('checkboxStatus', '');
         }else {
             startGame = false;
             countGame = 0;
-            randomCardArr = themes[getCurrentCard].map(el=>el.name).sort(rnd);
-            cards.forEach(el=> {
+            randomCardArr = themes[localStorage.getItem('currentCard')].map(el=>el.name).sort(rnd);
+            document.querySelectorAll('.card').forEach(el=> {
                 document.querySelector('.start-btn-text').innerHTML = 'Start Game';                
-                startBtn.style.display = 'flex';
+                document.getElementById('start-btn').style.display = 'flex';
                 el.classList.remove('bg-info');
                 el.querySelectorAll('.card-body').forEach(item => item.classList.add('hidden'));
             });
             localStorage.setItem('checkboxStatus', '');            
         }
     }else if (!event.target.checked) {
-        if(getCurrentCard === "Home") {
-            cards.forEach(el=>el.classList.add('bg-info'));
+        if(localStorage.getItem('currentCard') === "Home") {
+            document.querySelectorAll('.card').forEach(el=>el.classList.add('bg-info'));
             localStorage.setItem('checkboxStatus', 'bg-info');
         }else {
-            startBtn.style.display = 'none';
-            cards.forEach(el=> {
+            document.querySelector('.star-container').innerHTML = '';
+            document.getElementById('start-btn').style.display = 'none';
+            document.querySelectorAll('.card').forEach(el=> {
                 el.classList.add('bg-info');
                 el.querySelectorAll('.card-body').forEach(item => item.classList.remove('hidden'));
-                cards.forEach(el=>el.classList.remove('inactive'));
+                document.querySelectorAll('.card').forEach(el=>el.classList.remove('inactive'));
                 startGame = false;
             });
             localStorage.setItem('checkboxStatus', 'bg-info');
@@ -61,13 +61,19 @@ for (let href of navList.querySelectorAll('a')) {
     href.addEventListener('click', function(event){
         localStorage.setItem('currentCard', href.innerText);
         reloadStatus = false;
+        console.log(reloadStatus);
     });
 };
 
 header.addEventListener('click', controlMenu);
 switchBtn.addEventListener('click', controlGameStatus);
 window.addEventListener('beforeunload', (event) => {
+    if(currentPage === 'Cards') {
+        localStorage.setItem('statistic', JSON.stringify(currentStatistic));
+        console.log('12323123123')
+    }
     if (reloadStatus === true) {
         localStorage.setItem('checkboxStatus', 'bg-info');
     }
+    
 });

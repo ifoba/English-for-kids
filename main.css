@@ -143,21 +143,45 @@ switch-btn:checked:focus {
     outline-color: transparent;
 }
 
+.col.mb-3 {
+    position: relative;
+    left: 0;
+    transition: all 1.3s;
+}
+
+.col.mb-3:nth-child(4n+1).hidden {
+    left: -100vw;
+    transform: rotatez(180deg);
+}
+.col.mb-3:nth-child(4n+2).hidden {
+    left: -100vw;
+    transform: rotatez(180deg);
+}
+.col.mb-3:nth-child(4n+3).hidden {
+    left: 100vw;
+    transform: rotatez(180deg);
+}
+.col.mb-3:nth-child(4n+4).hidden {
+    left: 100vw;
+    transform: rotatez(180deg);
+}
+.card.bg-info:hover {
+    background-color: #0a7485!important;
+}
+
 .card {
     position: relative;
     cursor: pointer;
     background-color: #007213;
     text-decoration: none!important;
-    transition: transform 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     transform-style: preserve-3d;
 }
 .card:hover {
     background-color: #03500fe5;
     
 }
-.card.bg-info:hover {
-    background-color: #0a7485!important;
-}
+
 
 .card-body.hidden {
     display: none;
@@ -178,6 +202,7 @@ switch-btn:checked:focus {
     backface-visibility: hidden;
     
 }
+
 
 .card-flip-back {
     width: 100%;
@@ -226,6 +251,10 @@ switch-btn:checked:focus {
 
 .star-container img {
     width: 30px;
+}
+
+.col-auto img {
+    width: 35vw;
 }
 
 @media screen and (max-width: 767px) {

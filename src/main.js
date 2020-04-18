@@ -1,8 +1,7 @@
-import './header.js';
-const getCurrentCard = localStorage.getItem('currentCard');
 const cards = document.querySelectorAll('.card');
 let reloadStatus = true;
-if (getCurrentCard !== "Home") {
+let currentPage = 'Home';
+if (localStorage.getItem('currentCard') !== "Home") {
     localStorage.setItem('currentCard', 'Home');
 }
 for (let el of cards) {
